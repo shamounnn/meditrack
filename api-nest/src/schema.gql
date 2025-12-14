@@ -1,0 +1,136 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type MedicationSchedule {
+  id: Int!
+  medicationId: Int!
+  intakeTime: String
+  frequency: String
+  doseQuantity: Int
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type InteractionAlert {
+  id: Int!
+  userId: Int!
+  medication1Id: Int!
+  medication2Id: Int!
+  alertMessage: String!
+  severity: String
+  createdAt: DateTime!
+}
+
+type Medication {
+  id: Int!
+  userId: Int!
+  name: String!
+  dosage: String!
+  pillsPerBox: Int
+  currentPills: Int
+  sideEffects: String
+  lowStockThreshold: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type User {
+  id: Float!
+  username: String!
+  email: String!
+  createdAt: DateTime!
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+  medications: [Medication!]!
+  medication(id: Int!): Medication!
+  medicationsByUser(userId: Int!): [Medication!]!
+  schedules: [MedicationSchedule!]!
+  schedulesByMedication(medicationId: Int!): [MedicationSchedule!]!
+  schedulesByUser(userId: Int!): [MedicationSchedule!]!
+  alerts: [InteractionAlert!]!
+  alertsByUser(userId: Int!): [InteractionAlert!]!
+}
+
+type Mutation {
+  registerUser(input: CreateUserInput!): User!
+  loginUser(input: LoginInput!): String!
+  createMedication(input: CreateMedicationInput!): Medication!
+  updateMedication(input: UpdateMedicationInput!): Medication!
+  createSchedule(input: CreateScheduleInput!): MedicationSchedule!
+  updateSchedule(input: UpdateScheduleInput!): MedicationSchedule!
+  createAlert(input: CreateAlertInput!): InteractionAlert!
+  updateAlert(input: UpdateAlertInput!): InteractionAlert!
+}
+
+input CreateUserInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+input CreateMedicationInput {
+  userId: Int!
+  name: String!
+  dosage: String!
+  pillsPerBox: Int
+  currentPills: Int
+  sideEffects: String
+  lowStockThreshold: Int
+}
+
+input UpdateMedicationInput {
+  userId: Int
+  name: String
+  dosage: String
+  pillsPerBox: Int
+  currentPills: Int
+  sideEffects: String
+  lowStockThreshold: Int
+  id: Int!
+  quantityToDeduct: Int
+}
+
+input CreateScheduleInput {
+  medicationId: Int!
+  intakeTime: String
+  frequency: String
+  doseQuantity: Int
+}
+
+input UpdateScheduleInput {
+  medicationId: Int
+  intakeTime: String
+  frequency: String
+  doseQuantity: Int
+  id: Int!
+}
+
+input CreateAlertInput {
+  userId: Int!
+  medication1Id: Int!
+  medication2Id: Int!
+  alertMessage: String!
+  severity: String
+}
+
+input UpdateAlertInput {
+  userId: Int
+  medication1Id: Int
+  medication2Id: Int
+  alertMessage: String
+  severity: String
+  id: Int!
+}
