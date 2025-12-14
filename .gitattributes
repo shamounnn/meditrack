@@ -1,4 +1,0 @@
-*.log linguist-detectable=false
-*.html linguist-detectable=false
-*.md linguist-documentation=true
-package-lock.json linguist-generated=true
