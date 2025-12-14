@@ -98,7 +98,7 @@ psql meditrack < api-nest/database/schema.sql
 4. **Configure Environment**
 ```bash
 # Backend (.env in api-nest directory)
-cp api-nest/.env.example api-nest/.env
+api-nest/.env
 
 # Edit api-nest/.env with your configuration:
 PORT=4000
